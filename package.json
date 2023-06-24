@@ -1,5 +1,5 @@
 {
-  "name": "nextauth-nextjs13-prisma",
+  "name": "paptales",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "ai": "^2.1.7",
     "autoprefixer": "10.4.14",
+    "bcryptjs": "^2.4.3",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
+    "mongoose": "^7.3.1",
     "next": "13.4.7",
+    "next-auth": "^0.0.0-pr.6777.c5550344",
+    "openai-edge": "^1.1.0",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
