@@ -4,6 +4,16 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["bcryptjs"],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.freeimages.com",
+        port: "",
+        // pathname: '/account123/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

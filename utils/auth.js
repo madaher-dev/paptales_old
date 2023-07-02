@@ -21,7 +21,7 @@ export const authOptions = {
         if (!credentials?.email || !credentials.password) {
           return null;
         }
-        console.log("credentials", credentials);
+
         // write a post fetch request to the api
         try {
           const res = await fetch(`http://localhost:3000/api/user/login`, {
@@ -46,6 +46,7 @@ export const authOptions = {
             email: user.email,
             name: user.name,
             randomKey: "Hey cool",
+            players: user.players,
           };
         } catch (error) {
           console.log(error);
@@ -62,6 +63,7 @@ export const authOptions = {
           ...session.user,
           id: token.id,
           randomKey: token.randomKey,
+          players: token.players,
         },
       };
     },
@@ -72,9 +74,33 @@ export const authOptions = {
           ...token,
           id: user.id,
           randomKey: user.randomKey,
+          players: user.players,
         };
       }
       return token;
     },
+    async redirect({ url, baseUrl }) {
+      // console.log("Redirect Callback", { url, baseUrl });
+      if (url === baseUrl || url === "/") {
+        return Promise.resolve("/dashboard");
+      } else {
+        return Promise.resolve(url);
+      }
+    },
+
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   if (user) {
+    //     return "/welcome";
+    //   } else {
+    //     return false;
+    //   }
+    // },
+  },
+  pages: {
+    signIn: "/",
+    signOut: "/",
+    // error: "/auth/error", // Error code passed in query string as ?error=
+    // verifyRequest: "/auth/verify-request", // (used for check email message)
+    newUser: "/dashboard/new", // If set, new users will be directed here on first sign in
   },
 };

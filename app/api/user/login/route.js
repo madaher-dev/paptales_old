@@ -28,7 +28,6 @@ export async function POST(request) {
 
     return NextResponse.json({ user });
   } catch (error) {
-    console.log("heelo");
     return NextResponse.error(error);
   }
 }
