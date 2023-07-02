@@ -24,7 +24,7 @@ export const authOptions = {
         const URL = process.env.NEXT_PUBLIC_URL;
         // write a post fetch request to the api
         try {
-          const res = await fetch(`http://${URL}/api/user/login`, {
+          const res = await fetch(`${URL}/api/user/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
