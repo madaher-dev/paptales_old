@@ -19,7 +19,7 @@ export const authOptions = {
       decode: async ({ secret, token, maxAge }) => {},
     },
     secret: process.env.NEXTAUTH_SECRET,
-    secureCookie: process.env.NODE_ENV === "production", // Use secure cookies in production, but allow for testing in development.
+    secureCookie: process.env.NODE_ENV_CUSTOM === "production", // Use secure cookies in production, but allow for testing in development.
   },
   providers: [
     CredentialsProvider({
