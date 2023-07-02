@@ -4,6 +4,22 @@ import { compare } from "bcryptjs";
 export const authOptions = {
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // The number of seconds that a session is valid for.
+    updateAge: 24 * 60 * 60, // The number of seconds each time a session is accessed that the expiration is extended by.
+    jwt: {
+      signingKey: process.env.NEXTAUTH_SECRET,
+
+      // You can also specify other jwt options here and they will be passed directly to next-auth/jwt
+      // More info on available options at https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
+      // An encoded string representing a secure secret string
+      encode: async ({ secret, token, maxAge }) => {},
+
+      // An async function to decode the JWT for each request to fetch a session.
+      // This function is called everytime a Bearer token is provided as Authorization header.
+      decode: async ({ secret, token, maxAge }) => {},
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+    secureCookie: process.env.NODE_ENV === "production", // Use secure cookies in production, but allow for testing in development.
   },
   providers: [
     CredentialsProvider({
@@ -79,22 +95,6 @@ export const authOptions = {
       }
       return token;
     },
-    // async redirect({ url, baseUrl }) {
-    //   // console.log("Redirect Callback", { url, baseUrl });
-    //   if (url === baseUrl || url === "/") {
-    //     return Promise.resolve("/dashboard");
-    //   } else {
-    //     return Promise.resolve(url);
-    //   }
-    // },
-
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   if (user) {
-    //     return "/welcome";
-    //   } else {
-    //     return false;
-    //   }
-    // },
   },
   pages: {
     signIn: "/",
@@ -103,5 +103,4 @@ export const authOptions = {
     // verifyRequest: "/auth/verify-request", // (used for check email message)
     newUser: "/dashboard/new", // If set, new users will be directed here on first sign in
   },
-  secret: process.env.SECRET,
 };
