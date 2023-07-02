@@ -31,9 +31,3 @@ export async function POST(request) {
     return NextResponse.error(error);
   }
 }
-
-export const config = {
-  api: {
-    externalResolver: true,
-  },
-};

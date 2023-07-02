@@ -7,6 +7,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Paptales",
   description: "Stories about us!",
+  image: "/logo.png",
+  url: "https://paptales.vercel.app",
 };
 
 export default function RootLayout({ children }) {
