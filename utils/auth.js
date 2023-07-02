@@ -21,10 +21,10 @@ export const authOptions = {
         if (!credentials?.email || !credentials.password) {
           return null;
         }
-
+        const URL = process.env.NEXT_PUBLIC_URL;
         // write a post fetch request to the api
         try {
-          const res = await fetch(`http://localhost:3000/api/user/login`, {
+          const res = await fetch(`http://${URL}/api/user/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
