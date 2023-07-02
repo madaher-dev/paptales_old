@@ -103,4 +103,5 @@ export const authOptions = {
     // verifyRequest: "/auth/verify-request", // (used for check email message)
     newUser: "/dashboard/new", // If set, new users will be directed here on first sign in
   },
+  secret: process.env.SECRET,
 };
