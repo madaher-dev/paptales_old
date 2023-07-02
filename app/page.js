@@ -12,11 +12,6 @@ export default async function Home() {
   }
   return (
     <div className="min-h-screen bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">
-      <Head>
-        <title>Paptales</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <div className="h-40 flex items-center justify-center rounded-lg">
         <div>
           <h1 className="text-4xl font-bold text-center md:text-left text-white">

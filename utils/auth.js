@@ -79,14 +79,14 @@ export const authOptions = {
       }
       return token;
     },
-    async redirect({ url, baseUrl }) {
-      // console.log("Redirect Callback", { url, baseUrl });
-      if (url === baseUrl || url === "/") {
-        return Promise.resolve("/dashboard");
-      } else {
-        return Promise.resolve(url);
-      }
-    },
+    // async redirect({ url, baseUrl }) {
+    //   // console.log("Redirect Callback", { url, baseUrl });
+    //   if (url === baseUrl || url === "/") {
+    //     return Promise.resolve("/dashboard");
+    //   } else {
+    //     return Promise.resolve(url);
+    //   }
+    // },
 
     // async signIn({ user, account, profile, email, credentials }) {
     //   if (user) {
