@@ -42,7 +42,7 @@ export default function Signup() {
       signIn("credentials", {
         email: formValues.email,
         password: formValues.password,
-        callbackUrl: "/",
+        callbackUrl: process.env.NEXTAUTH_URL,
       });
     } catch (error) {
       setLoading1(false);
