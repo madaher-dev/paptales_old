@@ -38,11 +38,11 @@ export default function Signup() {
         alert((await res.json()).message);
         return;
       }
-
+      console.log("hello");
       signIn("credentials", {
         email: formValues.email,
         password: formValues.password,
-        callbackUrl: process.env.NEXTAUTH_URL,
+        // callbackUrl: process.env.NEXTAUTH_URL,
       });
     } catch (error) {
       setLoading1(false);
@@ -56,7 +56,7 @@ export default function Signup() {
     signIn("credentials", {
       email: formValues.email,
       password: formValues.password,
-      callbackUrl: "/",
+      // callbackUrl: "/",
     });
   };
 
