@@ -39,10 +39,12 @@ export default function Signup() {
         return;
       }
       console.log("hello");
+      // signIn('credentials', { redirect: false, password: 'password' })
       signIn("credentials", {
         email: formValues.email,
         password: formValues.password,
-        callbackUrl: "https://paptales.vercel.app/",
+        // callbackUrl: "https://paptales.vercel.app/",
+        redirect: false,
       });
     } catch (error) {
       setLoading1(false);
@@ -57,7 +59,8 @@ export default function Signup() {
       email: formValues.email,
       password: formValues.password,
       // callbackUrl: "/",
-      callbackUrl: "https://paptales.vercel.app/",
+      // callbackUrl: "https://paptales.vercel.app/",
+      redirect: false,
     });
   };
 
