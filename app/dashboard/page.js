@@ -7,10 +7,16 @@ const URL = process.env.NEXT_PUBLIC_URL || "http://localhost:3000";
 export default async function Welcome() {
   const session = await getServerSession(authOptions);
   const { user } = session;
-  let updatedUser = await fetch(`${URL}/api/user/${user.id}`);
-  updatedUser = await updatedUser.json();
-  updatedUser = updatedUser.data;
-  let players = updatedUser.players || [];
+  let updatedUser = {};
+  let players = [];
+  try {
+    updatedUser = await fetch(`${URL}/api/user/${user.id}`);
+    updatedUser = await updatedUser.json();
+    updatedUser = updatedUser.data;
+    players = updatedUser.players || [];
+  } catch (e) {
+    console.log(e);
+  }
 
   return (
     <div className="row-span-1 bg-red-200 flex items-center justify-center flex-col mt-6">

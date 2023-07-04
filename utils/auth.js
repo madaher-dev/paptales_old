@@ -51,8 +51,9 @@ export const authOptions = {
             return null;
           }
           const { user } = await res.json(); // convert the response to json
+          console.log("user", user);
 
-          if (!user.password) user.password = "";
+          if (!user?.password) user.password = "";
           if (!user || !(await compare(credentials.password, user.password))) {
             return null;
           }
@@ -101,6 +102,6 @@ export const authOptions = {
     signOut: "/",
     error: "/", // Error code passed in query string as ?error=
     // verifyRequest: "/auth/verify-request", // (used for check email message)
-    newUser: "/dashboard/new", // If set, new users will be directed here on first sign in
+    // newUser: "/dashboard/new", // If set, new users will be directed here on first sign in
   },
 };
