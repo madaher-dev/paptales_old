@@ -19,7 +19,7 @@ export const authOptions = {
       httpOnly: true,
       sameSite: "none",
       path: "/",
-      domain: process.env.NEXT_PUBLIC_DOMAIN,
+      domain: process.env.NEXT_PUBLIC_URL,
       secure: true,
     },
   },
