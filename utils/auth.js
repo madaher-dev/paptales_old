@@ -68,7 +68,7 @@ export const authOptions = {
             // console.log("no user or password");
             return null;
           }
-          // console.log("user", user);
+          console.log("user", user);
           return {
             id: user.id,
             email: user.email,
