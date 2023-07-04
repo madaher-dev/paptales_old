@@ -42,7 +42,7 @@ export default function Signup() {
       signIn("credentials", {
         email: formValues.email,
         password: formValues.password,
-        // callbackUrl: process.env.NEXTAUTH_URL,
+        callbackUrl: "https://paptales.vercel.app/",
       });
     } catch (error) {
       setLoading1(false);
@@ -57,6 +57,7 @@ export default function Signup() {
       email: formValues.email,
       password: formValues.password,
       // callbackUrl: "/",
+      callbackUrl: "https://paptales.vercel.app/",
     });
   };
 
