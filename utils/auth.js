@@ -57,6 +57,15 @@ export const authOptions = {
 
           if (!user?.password) user.password = "";
           if (!user || !(await compare(credentials.password, user.password))) {
+            console.log(
+              "password",
+              credentials.password,
+              "user.password",
+              user.password,
+              "compare",
+              await compare(credentials.password, user.password)
+            );
+            console.log("no user or password");
             return null;
           }
           // console.log("user", user);
