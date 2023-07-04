@@ -52,7 +52,7 @@ export const authOptions = {
           }
           const { user } = await res.json(); // convert the response to json
           console.log("user", user);
-          let callback = process.env.NEXTAUTH_SECRET;
+          let callback = process.env.NEXTAUTH_URL;
           console.log("callback", callback);
 
           if (!user?.password) user.password = "";
