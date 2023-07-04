@@ -2,16 +2,29 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 
 export const authOptions = {
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // The number of seconds that a session is valid for.
-    updateAge: 24 * 60 * 60, // The number of seconds each time a session is accessed that the expiration is extended by.
-    jwt: {
-      signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
+  // session: {
+  //   strategy: "jwt",
+  //   maxAge: 30 * 24 * 60 * 60, // The number of seconds that a session is valid for.
+  //   updateAge: 24 * 60 * 60, // The number of seconds each time a session is accessed that the expiration is extended by.
+  //   jwt: {
+  //     signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
+  //   },
+  //   secret: process.env.SESSION_SECRET,
+  //   secureCookie: process.env.NODE_ENV === "production", // Use secure cookies in production, but allow for testing in development.
+  // },
+
+  sessionToken: {
+    name: `next-auth.session-token`,
+    options: {
+      httpOnly: true,
+      sameSite: "none",
+      path: "/",
+      domain: process.env.NEXT_PUBLIC_DOMAIN,
+      secure: true,
     },
-    secret: process.env.SESSION_SECRET,
-    secureCookie: process.env.NODE_ENV === "production", // Use secure cookies in production, but allow for testing in development.
   },
+  callbackUrl: process.env.NEXT_PUBLIC_URL,
+
   providers: [
     CredentialsProvider({
       name: "Sign in",
