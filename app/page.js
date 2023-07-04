@@ -7,6 +7,7 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
   const user = session?.user ?? null;
   if (session) {
+    console.log("session", session);
     redirect("/dashboard");
   }
   return (
