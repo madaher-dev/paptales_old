@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { compare } from "bcryptjs";
+import { hash } from "bcryptjs";
+import User from "@/models/userModel";
 
 export const authOptions = {
   // session: {
@@ -13,17 +14,17 @@ export const authOptions = {
   //   secureCookie: process.env.NODE_ENV === "production", // Use secure cookies in production, but allow for testing in development.
   // },
 
-  sessionToken: {
-    name: `next-auth.session-token`,
-    options: {
-      httpOnly: true,
-      sameSite: "none",
-      path: "/",
-      domain: process.env.NEXT_PUBLIC_URL,
-      secure: true,
-    },
-  },
-  callbackUrl: process.env.NEXT_PUBLIC_URL,
+  // sessionToken: {
+  //   name: `next-auth.session-token`,
+  //   options: {
+  //     httpOnly: true,
+  //     sameSite: "none",
+  //     path: "/",
+  //     domain: process.env.NEXT_PUBLIC_URL,
+  //     secure: true,
+  //   },
+  // },
+  // callbackUrl: process.env.NEXT_PUBLIC_URL,
 
   providers: [
     CredentialsProvider({
@@ -41,26 +42,31 @@ export const authOptions = {
         if (!credentials?.email || !credentials.password) {
           return null;
         }
-        const URL = process.env.NEXT_PUBLIC_URL;
+        // const URL = process.env.NEXT_PUBLIC_URL;
         // write a post fetch request to the api
         try {
-          const res = await fetch(`${URL}/api/user/login`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email: credentials.email }),
-          }); // fetch the user from the api
-          if (!res.ok) {
-            return null;
-          }
-          const { user } = await res.json(); // convert the response to json
-          console.log("user", user);
-          let callback = process.env.NEXTAUTH_URL;
-          console.log("callback", callback);
+          await connectToDatabase();
+          const hashed_password = await hash(credentials.password, 12);
+          const user = await User.findOne({ email, password: hashed_password });
 
-          if (!user?.password) user.password = "";
-          if (!user || !(await compare(credentials.password, user.password))) {
+          // const res = await fetch(`${URL}/api/user/login`, {
+          //   method: "POST",
+          //   headers: {
+          //     "Content-Type": "application/json",
+          //   },
+          //   body: JSON.stringify({ email: credentials.email }),
+          // }); // fetch the user from the api
+          // if (!res.ok) {
+          //   return null;
+          // }
+          // const { user } = await res.json(); // convert the response to json
+          // console.log("user", user);
+          // let callback = process.env.NEXTAUTH_URL;
+          // console.log("callback", callback);
+
+          // if (!user?.password) user.password = "";
+          // if (!user || !(await compare(credentials.password, user.password))) {
+          if (!user) {
             // console.log(
             //   "password",
             //   credentials.password,
